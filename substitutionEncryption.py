@@ -7,7 +7,10 @@ def encrypt(text, key):
 
     for ch in text:
         idx = ALPHABET.find(ch)
-        encText = encText + key[idx]
+        if idx == -1:
+            encText += ch  # leave unchanged
+        else:
+            encText += key[idx]
 
     return encText
 
@@ -28,6 +31,9 @@ def decrypt(text, key):
 
     for ch in text:
         idx = key.find(ch)
-        decText = decText + ALPHABET[idx]
+        if idx == -1:
+            decText += ch  # leave unchanged
+        else:
+            decText += ALPHABET[idx]
 
     return decText

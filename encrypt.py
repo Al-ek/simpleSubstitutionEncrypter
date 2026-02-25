@@ -32,17 +32,20 @@ elif choice == "e":
     with open("keys/" + keyFileName, "r") as f:
         key = f.read()
     
-    with open(inputFileName, "r") as f:
+    with open(inputFileName, "r", newline="") as f:
+        print("Original text:")
         contents = f.read()
+        print(contents)
         encryptedContents = encrypt(contents, key)
+        print(encryptedContents)
 
-    if Path("outputs").exists():
-        with open("outputs/" + str(datetime.now()), "w") as f:
-            print(encryptedContents, file=f, end="")
-    else:
-        os.mkdir("outputs") 
-        with open("outputs/" + inputFileName, "w") as f:
-            print(encryptedContents, file=f, end="")
+        if Path("outputs").exists():
+            with open("outputs/" + inputFileName, "w", newline="") as f:
+                print(encryptedContents, file=f, end="")
+        else:
+            os.mkdir("outputs") 
+            with open("outputs/" + inputFileName, "w", newline="") as f:
+                print(encryptedContents, file=f, end="")
 
 elif choice == "d": 
     keyFileName = input("Select key from the 'keys' dir: ")
@@ -51,7 +54,7 @@ elif choice == "d":
     with open("keys/" + keyFileName, "r") as f:
         key = f.read()
 
-    with open(inputFileName, "r") as f:
+    with open(inputFileName, "r", newline="") as f:
         contents = f.read()
         decryptedContents = decrypt(contents, key)
         print(decryptedContents)
